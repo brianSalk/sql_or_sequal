@@ -26,8 +26,9 @@ if not subreddits:
     print('please provide at least one subreddit', file=sys.stderr)
     exit(1)
 search_subreddits(subreddits = subreddits, limit = limit)
-print(sql_dict)
-print(user_dict)
+print(f"pronounce as 'SQL': {sql_dict['SQL']}")
+print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
+#print(user_dict)
 if create_barchart:
     ppl.create_sql_vs_sequal_chart(sql_dict)
 

@@ -47,7 +47,10 @@ def sql_regex(text, submission=None, comment = None):
         log_match(each_match, sub, user)
         each_match = each_match.lower()
         each_match = " ".join(each_match.split())
-        sql_dict[each_match] += 1
+        if each_match == 'a sql':
+            sql_dict['Sequal'] += 1
+        elif each_match == 'an sql':
+            sql_dict['SQL'] += 1
         if re.match(a_sql,each_match):
             user_dict[user][0]+=1
         else:
