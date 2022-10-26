@@ -1,8 +1,9 @@
-from lib import *
-import matplotlib.pyplot as plt
+from praw_lib import *
 import sys
+import pyplot_lib as ppl
 subreddits = ''
 limit = 100
+create_barchart = False
 for i,arg in enumerate(sys.argv):
     if i == 0:
         continue
@@ -18,6 +19,8 @@ for i,arg in enumerate(sys.argv):
             exit(1)
         else:
             limit = int(sys.argv[i+1])
+    if arg == '--chart':
+        create_barchart = True
 
 if not subreddits:
     print('please provide at least one subreddit', file=sys.stderr)
@@ -25,4 +28,6 @@ if not subreddits:
 search_subreddits(subreddits = subreddits, limit = limit)
 print(sql_dict)
 print(user_dict)
+if create_barchart:
+    ppl.create_sql_vs_sequal_chart(sql_dict)
 
