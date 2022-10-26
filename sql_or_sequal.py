@@ -1,4 +1,5 @@
 from lib import *
+import matplotlib.pyplot as plt
 import sys
 subreddits = ''
 limit = 100
@@ -25,14 +26,3 @@ search_subreddits(subreddits = subreddits, limit = limit)
 print(sql_dict)
 print(user_dict)
 
-# pickle stuff
-
-#sql_dict_file = open("pickle_objects/sql_dict", "wb")
-#user_list = []
-#for key,val in user_dict.items():
-#    user_list.append([key,val])
-#user_list_file = open("pickle_objects/user_list", "wb")
-#pickle.dump(user_list,user_list_file)
-#pickle.dump(sql_dict, sql_dict_file)
-#sql_dict_file.close()
-#user_list_file.close()
