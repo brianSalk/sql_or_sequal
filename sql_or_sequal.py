@@ -4,6 +4,14 @@ import pyplot_lib as ppl
 subreddits = ''
 limit = 100
 create_barchart = False
+if '--help' in sys.argv or '-h' in sys.argv:
+    print('command line arguments for sql_or_squal:')
+    print('-h or --help: display this message and exit successfully')
+    print('-s or --subreddit [subreddit_list]: indicate in which subreddit(s) to search')
+    print('-l or --limit: number of submissions to search per subreddit')
+    print('--chart: no arguments, create a visual bar char of results')
+    sys.exit()
+    
 for i,arg in enumerate(sys.argv):
     if i == 0:
         continue
