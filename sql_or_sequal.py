@@ -9,7 +9,7 @@ for i,arg in enumerate(sys.argv):
         continue
     if arg == '--subreddit' or arg == '-s':
         if i == len(sys.argv)-1:
-            print(f"mandatory argument to '{arg}' not provided\nplease provide a list of at least one subreddit seperated by '+'",file=sys.stderr)
+            print(f"mandatory argument to '{arg}' not provided\nplease provide a list of at least one subreddit seperated by '+'\nexample: 'subreddit1+subreddit2'",file=sys.stderr)
             exit(1)
         else:
             subreddits = sys.argv[i+1]
@@ -23,7 +23,7 @@ for i,arg in enumerate(sys.argv):
         create_barchart = True
 
 if not subreddits:
-    print('please provide at least one subreddit', file=sys.stderr)
+    print('please provide at least one subreddit\nexample: "subreddit1+subreddit2"', file=sys.stderr)
     exit(1)
 search_subreddits(subreddits = subreddits, limit = limit)
 print(f"pronounce as 'SQL': {sql_dict['SQL']}")

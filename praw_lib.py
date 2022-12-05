@@ -19,7 +19,7 @@ sql_dict = defaultdict(int)
 # count occurances of 'an sql' and 'a sql' from each user
 user_dict = defaultdict(lambda : [0,0])
 # count occurances of 'an sql' and 'a sql' within each subreddit
-
+# NOT HERE YET
 def log_match(mtch, sub, user):
     logging.info( "'" + mtch + "'" + " found in subreddit " + sub + " by user " + user)
 
