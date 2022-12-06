@@ -59,11 +59,12 @@ def sql_regex(text, submission=None, comment = None):
         
 
 def search_subreddits(subreddits,limit = 1000):
-    for submission in reddit.subreddit(subreddits).new(limit=limit):
-        #print(submission.title)
-        comment_forest = submission.comments.replace_more(limit=100)
-        sql_regex(submission.title, submission=submission)
-        sql_regex(submission.selftext, submission)
-        for comment in comment_forest:
-            sql_regex(comment.selftext, comment=comment)
+    for each_sub in subreddits.split('+'):
+        for submission in reddit.subreddit(each_sub).new(limit=limit):
+            #print(submission.title)
+            comment_forest = submission.comments.replace_more(limit=100)
+            sql_regex(submission.title, submission=submission)
+            sql_regex(submission.selftext, submission)
+            for comment in comment_forest:
+                sql_regex(comment.selftext, comment=comment)
 

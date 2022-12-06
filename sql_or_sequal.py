@@ -39,4 +39,3 @@ print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 #print(user_dict)
 if create_barchart:
     ppl.create_sql_vs_sequal_chart(sql_dict)
-
