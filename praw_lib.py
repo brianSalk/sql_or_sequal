@@ -57,9 +57,25 @@ def sql_regex(text, submission=None, comment = None):
             user_dict[user][1]+=1
 
         
-
+def get_invalid_subreddits(subreddits_list):
+    invalid_list = []
+    for sub in subreddits_list:
+        for each in subreddits_list:
+            try:
+                reddit.subreddits.search_by_name(each, exact=True)
+            except Exception as e:
+                #print(e)
+                invalid_list.append(each)
+        return invalid_list
 def search_subreddits(subreddits,limit = 1000):
-    for each_sub in subreddits.split('+'):
+    subreddits = subreddits.split('+')
+    invalid = get_invalid_subreddits(subreddits)
+    if len(invalid) > 0:
+        print('the following subreddit(s) do not exist')
+        sys.exit(1)
+        
+    
+    for each_sub in subreddits:
         for submission in reddit.subreddit(each_sub).new(limit=limit):
             #print(submission.title)
             comment_forest = submission.comments.replace_more(limit=100)
