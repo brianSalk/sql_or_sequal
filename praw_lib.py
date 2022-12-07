@@ -72,6 +72,7 @@ def search_subreddits(subreddits,limit = 1000):
     invalid = get_invalid_subreddits(subreddits)
     if len(invalid) > 0:
         print('the following subreddit(s) do not exist')
+        print(invalid)
         sys.exit(1)
         
     
