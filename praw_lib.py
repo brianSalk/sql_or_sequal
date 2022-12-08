@@ -15,15 +15,15 @@ reddit = praw.Reddit(
         )
 #print(reddit.user.me())
 # count each occurance of 'an sql' or 'a sql'
-sql_dict = defaultdict(int)
+#sql_dict = defaultdict(int)
 # count occurances of 'an sql' and 'a sql' from each user
-user_dict = defaultdict(lambda : [0,0])
+#user_dict = defaultdict(lambda : [0,0])
 # count occurances of 'an sql' and 'a sql' within each subreddit
 # NOT HERE YET
 def log_match(mtch, sub, user):
     logging.info( "'" + mtch + "'" + " found in subreddit " + sub + " by user " + user)
 
-def sql_regex(text, submission=None, comment = None):
+def sql_regex(text, submission=None, comment = None, sql_dict=None):
     user = ""
     sub = ""
     if submission:
@@ -51,10 +51,6 @@ def sql_regex(text, submission=None, comment = None):
             sql_dict['Sequal'] += 1
         elif each_match == 'an sql':
             sql_dict['SQL'] += 1
-        if re.match(a_sql,each_match):
-            user_dict[user][0]+=1
-        else:
-            user_dict[user][1]+=1
 
         
 def get_invalid_subreddits(subreddits_list):
@@ -67,7 +63,7 @@ def get_invalid_subreddits(subreddits_list):
                 #print(e)
                 invalid_list.append(each)
         return invalid_list
-def search_subreddits(subreddits,limit = 1000):
+def search_subreddits(subreddits,limit = 1000,user_dict=None,sql_dict=None):
     subreddits = subreddits.split('+')
     invalid = get_invalid_subreddits(subreddits)
     if len(invalid) > 0:
@@ -75,13 +71,16 @@ def search_subreddits(subreddits,limit = 1000):
         print(invalid)
         sys.exit(1)
         
-    
     for each_sub in subreddits:
+        sdict = defaultdict(int)
         for submission in reddit.subreddit(each_sub).new(limit=limit):
             #print(submission.title)
             comment_forest = submission.comments.replace_more(limit=100)
-            sql_regex(submission.title, submission=submission)
-            sql_regex(submission.selftext, submission)
+            sql_regex(submission.title, submission=submission, sql_dict=sdict)
+            sql_regex(submission.selftext, submission, sql_dict=sdict)
             for comment in comment_forest:
-                sql_regex(comment.selftext, comment=comment)
+                sql_regex(comment.selftext, comment=comment, sql_dict=sdict)
+        for key,val in sdict.items():
+            sql_dict[key] += val
+
 
