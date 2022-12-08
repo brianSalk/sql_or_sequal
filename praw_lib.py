@@ -64,7 +64,6 @@ def get_invalid_subreddits(subreddits_list):
             try:
                 reddit.subreddits.search_by_name(each, exact=True)
             except Exception as e:
-                #print(e)
                 invalid_list.append(each)
         return invalid_list
 def search_subreddits(subreddits,limit = 1000):
