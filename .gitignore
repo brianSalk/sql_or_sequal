@@ -1,5 +1,6 @@
 credentials.py
 .*.swp
+errors
 .images
 /pickle_objects/*
 /__pycache__/*

@@ -34,7 +34,12 @@ for i,arg in enumerate(sys.argv):
 if not subreddits:
     print('please provide at least one subreddit\nexample: "subreddit1+subreddit2"', file=sys.stderr)
     exit(1)
-search_subreddits(subreddits = subreddits, limit = limit,sql_dict=sql_dict)
+list_of_dicts = search_subreddits(subreddits = subreddits, limit = limit)
+# now combine the dicts into sql_dict
+
+for each_dict in list_of_dicts:
+    for key,val in each_dict.items():
+        sql_dict[key] += val
 print(f"pronounce as 'SQL': {sql_dict['SQL']}")
 print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 #print(user_dict)
