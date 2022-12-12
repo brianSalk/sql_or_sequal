@@ -3,6 +3,7 @@ import sys
 import pyplot_lib as ppl
 subreddits = ''
 limit = 100
+sql_dict = {'SQL': 0, 'Sequal': 0}
 create_barchart = False
 if '--help' in sys.argv or '-h' in sys.argv:
     print('command line arguments for sql_or_squal:')
@@ -33,7 +34,8 @@ for i,arg in enumerate(sys.argv):
 if not subreddits:
     print('please provide at least one subreddit\nexample: "subreddit1+subreddit2"', file=sys.stderr)
     exit(1)
-search_subreddits(subreddits = subreddits, limit = limit)
+sql_dict = search_subreddits(subreddits = subreddits, limit = limit)
+
 print(f"pronounce as 'SQL': {sql_dict['SQL']}")
 print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 #print(user_dict)
