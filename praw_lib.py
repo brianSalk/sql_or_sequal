@@ -94,5 +94,8 @@ def search_subreddits(subreddits,limit = 1000):
             processes.append(p)
         for proc in processes:
             proc.join()
-        return mp_list
-
+        ans = defaultdict(int)
+        for each in mp_list:
+            for key,val in each.items():
+                ans[key] += val
+        return ans
