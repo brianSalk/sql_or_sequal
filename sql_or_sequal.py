@@ -5,6 +5,7 @@ subreddits = ''
 limit = 100
 sql_dict = {'SQL': 0, 'Sequal': 0}
 create_barchart = False
+# if --help or -h appear in ANY of the command line args, print help and exit
 if '--help' in sys.argv or '-h' in sys.argv:
     print('command line arguments for sql_or_squal:')
     print('-h or --help: display this message and exit successfully')
@@ -12,8 +13,9 @@ if '--help' in sys.argv or '-h' in sys.argv:
     print('-l or --limit: number of submissions to search per subreddit')
     print('--chart: no arguments, create a visual bar char of results')
     sys.exit()
-    
-for i,arg in enumerate(sys.argv):
+
+# command line args are (-s,--subreddit), (-l,--limit), (--chart)
+for i,arg in enumerate(sys.argv): # go through all command line args
     if i == 0:
         continue
     if arg == '--subreddit' or arg == '-s':
@@ -31,13 +33,13 @@ for i,arg in enumerate(sys.argv):
     if arg == '--chart':
         create_barchart = True
 
-if not subreddits:
+if not subreddits: # exit with error code if no subreddit specified
     print('please provide at least one subreddit\nexample: "subreddit1+subreddit2"', file=sys.stderr)
     exit(1)
 sql_dict = search_subreddits(subreddits = subreddits, limit = limit)
-
+# print how often a sql or an sql was found
 print(f"pronounce as 'SQL': {sql_dict['SQL']}")
 print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
-#print(user_dict)
+
 if create_barchart:
     ppl.create_sql_vs_sequal_chart(sql_dict)

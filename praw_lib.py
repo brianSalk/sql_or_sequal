@@ -7,6 +7,7 @@ import multiprocessing as mp
 from collections import defaultdict
 logging.basicConfig(format='%(levelname)s:%(message)s',level=logging.INFO)
 
+# authorize app
 reddit = praw.Reddit(
         client_id = c.client_id,
         client_secret = c.client_secret,
@@ -14,17 +15,16 @@ reddit = praw.Reddit(
         username = c.username,
         password = c.password
         )
-#print(reddit.user.me())
-# count each occurance of 'an sql' or 'a sql'
-#sql_dict = defaultdict(int)
-# count occurances of 'an sql' and 'a sql' from each user
-#user_dict = defaultdict(lambda : [0,0])
-# count occurances of 'an sql' and 'a sql' within each subreddit
-# NOT HERE YET
 def log_match(mtch, sub, user):
+    """
+    log info about the match that was found
+    """
     logging.info( "'" + mtch + "'" + " found in subreddit " + sub + " by user " + user)
 
 def sql_regex(text, submission=None, comment = None, sql_dict=None):
+    """
+    if regex match found, incrament dict at key
+    """
     user = ""
     sub = ""
     if submission:
@@ -55,6 +55,10 @@ def sql_regex(text, submission=None, comment = None, sql_dict=None):
 
         
 def get_invalid_subreddits(subreddits_list):
+    """
+    if one or more subreddit is invalid, return in list,
+    if no invalid subreddits, return empty list
+    """
     invalid_list = []
     for sub in subreddits_list:
         for each in subreddits_list:
@@ -64,6 +68,9 @@ def get_invalid_subreddits(subreddits_list):
                 invalid_list.append(each)
         return invalid_list
 def search_subreddit(each_sub, mp_list,limit):
+    """
+    search submissions and comments in subreddit
+    """
     sdict = defaultdict(int)
     for submission in reddit.subreddit(each_sub).new(limit=limit):
         #print(submission.title)
@@ -77,6 +84,9 @@ def search_subreddit(each_sub, mp_list,limit):
 
 
 def search_subreddits(subreddits,limit = 1000):
+    """
+    loop over all subreddits
+    """
     subreddits = subreddits.split('+')
     invalid = get_invalid_subreddits(subreddits)
     if len(invalid) > 0:
