@@ -13,6 +13,6 @@ are saying 'a ESS-QUE-EL'.
 **5)** once you have created your app, create the following variables in your *credentials.py* file: \
 	*client_id, client_secrete, user_agent, username, password* \
 and set each to its appropriate value \
-**Exapmles**
+### Examples
 python sql\_or\_sequal -s 'sql+programminghumor' -l 300 --chart
 
