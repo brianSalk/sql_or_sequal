@@ -14,5 +14,6 @@ are saying 'a ESS-QUE-EL'.
 	*client_id, client_secrete, user_agent, username, password* \
 and set each to its appropriate value \
 ### Examples
+#### search 300 submissions in sql and programminghumor, also print a chart of the data
 python sql\_or\_sequal -s 'sql+programminghumor' -l 300 --chart
 
