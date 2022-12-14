@@ -1,6 +1,4 @@
+*
+!*.py
 credentials.py
-.*.swp
-errors
-.images
-/pickle_objects/*
-/__pycache__/*
+!README.md
