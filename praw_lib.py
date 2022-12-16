@@ -6,7 +6,6 @@ import credentials as c
 import multiprocessing as mp
 from collections import defaultdict
 logging.basicConfig(format='%(levelname)s:%(message)s',level=logging.INFO)
-logger = logging.getLogger()
 # authorize app
 reddit = praw.Reddit(
         client_id = c.client_id,
