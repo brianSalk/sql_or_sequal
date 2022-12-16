@@ -13,6 +13,7 @@ if '--help' in sys.argv or '-h' in sys.argv:
     print('-s or --subreddit [subreddit_list]: indicate in which subreddit(s) to search')
     print('-l or --limit: number of submissions to search per subreddit')
     print('--chart: no arguments, create a visual bar char of results')
+    print('-v or --verbose: no arguments, log the name of the user and subreddit for each hit')
     sys.exit()
 
 # command line args are (-s,--subreddit), (-l,--limit), (--chart)
@@ -33,7 +34,7 @@ for i,arg in enumerate(sys.argv): # go through all command line args
             limit = int(sys.argv[i+1])
     if arg == '--chart':
         create_barchart = True
-    if arg == '-v':
+    if arg == '-v' or arg == '--verbose':
         verbose = True
 
 if not subreddits: # exit with error code if no subreddit specified
