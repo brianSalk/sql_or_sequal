@@ -6,7 +6,7 @@ import credentials as c
 import multiprocessing as mp
 from collections import defaultdict
 logging.basicConfig(format='%(levelname)s:%(message)s',level=logging.INFO)
-
+logger = logging.getLogger()
 # authorize app
 reddit = praw.Reddit(
         client_id = c.client_id,
@@ -21,7 +21,7 @@ def log_match(mtch, sub, user):
     """
     logging.info( "'" + mtch + "'" + " found in subreddit " + sub + " by user " + user)
 
-def sql_regex(text, submission=None, comment = None, sql_dict=None):
+def sql_regex(text, submission=None, comment = None, sql_dict=None, verbose=False):
     """
     if regex match found, incrament dict at key
     """
@@ -45,7 +45,8 @@ def sql_regex(text, submission=None, comment = None, sql_dict=None):
     a_sql = re.compile(r'^a sql$')
     an_sql = re.compile(r'^an sql$')
     for each_match in mtch:
-        log_match(each_match, sub, user)
+        if verbose:
+            log_match(each_match, sub, user)
         each_match = each_match.lower()
         each_match = " ".join(each_match.split())
         if each_match == 'a sql':
@@ -67,7 +68,7 @@ def get_invalid_subreddits(subreddits_list):
             except Exception as e:
                 invalid_list.append(each)
         return invalid_list
-def search_subreddit(each_sub, mp_list,limit):
+def search_subreddit(each_sub, mp_list,limit,verbose=False):
     """
     search submissions and comments in subreddit
     """
@@ -75,15 +76,15 @@ def search_subreddit(each_sub, mp_list,limit):
     for submission in reddit.subreddit(each_sub).new(limit=limit):
         #print(submission.title)
         comment_forest = submission.comments.replace_more(limit=100)
-        sql_regex(submission.title, submission=submission, sql_dict=sdict)
-        sql_regex(submission.selftext, submission, sql_dict=sdict)
+        sql_regex(submission.title, submission=submission, sql_dict=sdict,verbose=verbose)
+        sql_regex(submission.selftext, submission, sql_dict=sdict, verbose=verbose)
         for comment in comment_forest:
-            sql_regex(comment.selftext, comment=comment, sql_dict=sdict)
+            sql_regex(comment.selftext, comment=comment, sql_dict=sdict, verbose=verbose)
     mp_list.append(sdict)
 
 
 
-def search_subreddits(subreddits,limit = 1000):
+def search_subreddits(subreddits,limit = 1000,verbose=False):
     """
     loop over all subreddits
     """
@@ -98,7 +99,7 @@ def search_subreddits(subreddits,limit = 1000):
         processes = []
         for each_sub in subreddits:
             # start new process each time this is called
-            p = mp.Process(target=search_subreddit, args=(each_sub,mp_list,limit))
+            p = mp.Process(target=search_subreddit, args=(each_sub,mp_list,limit,verbose))
             p.start()
             processes.append(p)
         for proc in processes:
