@@ -16,4 +16,10 @@ and set each to its appropriate value
 ### Examples
 #### search 300 submissions in r/sql and r/programminghumor, also print a chart of the data
 `python sql_or_sequal -s 'sql+programminghumor' -l 300 --chart`
+## Help
+**Please help me:** \
+remove the error output at the beginning. \
+Do more meaningful analysis (Can we apply some hypothesis testing or basian statistics?) \
+make the code run faster. 
+
 
