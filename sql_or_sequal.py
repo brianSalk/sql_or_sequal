@@ -1,19 +1,23 @@
 from praw_lib import *
 import sys
 import pyplot_lib as ppl
+import h_tests
 subreddits = ''
 limit = 100
 sql_dict = {'SQL': 0, 'Sequal': 0}
 create_barchart = False
 verbose = False
+chisquare = False
+chisquare_hypothesis = None
 # if --help or -h appear in ANY of the command line args, print help and exit
 if '--help' in sys.argv or '-h' in sys.argv:
     print('command line arguments for sql_or_squal:')
     print('-h or --help: display this message and exit successfully')
     print('-s or --subreddit [subreddit_list]: indicate in which subreddit(s) to search')
-    print('-l or --limit: number of submissions to search per subreddit')
+    print('-l or --limit: number of submissions to search per subreddit.  default is 100')
     print('--chart: no arguments, create a visual bar char of results')
     print('-v or --verbose: no arguments, log the name of the user and subreddit for each hit')
+    print('--chisquare: perform chisquare goodness of fit test, optional argument is ratio of sql to sequal.  Default arg is .5')
     sys.exit()
 
 # command line args are (-s,--subreddit), (-l,--limit), (--chart)
@@ -36,6 +40,16 @@ for i,arg in enumerate(sys.argv): # go through all command line args
         create_barchart = True
     if arg == '-v' or arg == '--verbose':
         verbose = True
+    if arg == '--chisquare':
+        chisquare = True
+        if i == len(sys.argv)-1:
+            continue
+        else:
+            # allow user to enter hypothesis
+            # determine best way to do this.
+            pass
+
+
 
 if not subreddits: # exit with error code if no subreddit specified
     print('please provide at least one subreddit\nexample: "subreddit1+subreddit2"', file=sys.stderr)
@@ -47,3 +61,8 @@ print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 
 if create_barchart:
     ppl.create_sql_vs_sequal_chart(sql_dict)
+if chisquare:
+    o = [sql_dict['SQL'], sql_dict['Sequal']]
+    total = sql_dict['SQL'] + sql_dict['Sequal']
+    hypothesis = [total/2, total/2]
+    h_tests.perform_chisquare(o,hypothesis)

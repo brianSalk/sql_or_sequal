@@ -6,5 +6,3 @@ def perform_chisquare(o,e):
     res = stats.chisquare(o,e)
     print(f'pvalue: {res.pvalue}') 
     print(f'test statistic: {res.statistic}')
-if __name__ == '__main__':
-    perform_chisquare([12,10], [11,11])
