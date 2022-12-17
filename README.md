@@ -17,9 +17,9 @@ and set each to its appropriate value
 #### view complete list of valid command line arguments along with breif summary of usage:
 `python sql_or_sequal.py -h`
 #### search 300 submissions in r/sql and r/programminghumor, also print a chart of the data
-`python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart` \
-As of now, there is a lot of stderr output, to suppress the stderr output, prepend `2> /dev/null ` to the above command: \
-`2> /dev/null python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart` \
+```python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart```
+As of now, there is a lot of stderr output, to suppress the stderr output, prepend `2> /dev/null ` to the above command: 
+```2> /dev/null python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart```
 ## Help
 **Please help me:** \
 remove the error output at the beginning. \
