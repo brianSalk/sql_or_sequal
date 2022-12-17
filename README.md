@@ -15,7 +15,9 @@ are saying 'a ESS-QUE-EL'.
 and set each to its appropriate value 
 ### Examples
 #### view complete list of valid command line arguments along with breif summary of usage:
-`python sql_or_sequal.py -h`
+```
+python sql_or_sequal.py -h
+```
 #### search 300 submissions in r/sql and r/programminghumor, also print a chart of the data
 ```
 python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart
