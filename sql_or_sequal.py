@@ -1,7 +1,7 @@
 from praw_lib import *
 import sys
 import pyplot_lib as ppl
-import h_tests
+from scipy import stats 
 subreddits = ''
 limit = 100
 sql_dict = {'SQL': 0, 'Sequal': 0}
@@ -65,9 +65,11 @@ if create_barchart:
 if chisquare:
     o = [sql_dict['SQL'], sql_dict['Sequal']]
     total = sql_dict['SQL'] + sql_dict['Sequal']
-    hypothesis = [total/2, total/2]
+    e = [total/2, total/2]
     if chisquare_hypothesis:
         expected_sql = (chisquare_hypothesis / (chisquare_hypothesis + 1)) * total
         expected_sequal = total - expected_sql
-        hypothesis = [(expected_sql), (expected_sequal)]
-    h_tests.perform_chisquare(o,hypothesis)
+        e = [expected_sql, expected_sequal]
+    res = stats.chisquare(o,e)
+    print(f'chi-square GOF pvalue: {res.pvalue}') 
+    print(f'chi-square GOF test statistic: {res.statistic}')
