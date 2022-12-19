@@ -28,7 +28,7 @@ As of now there is a lot of stderr output.  To suppress the stderr output, prepe
 ```
 ## Help Wanted
 **Please help me:** \
-remove the error output at the beginning. \
+remove the error output at the beginning. 
 
 
 
