@@ -1,14 +1,16 @@
 from praw_lib import *
+import argparse
 import sys
 import pyplot_lib as ppl
 from scipy import stats 
-subreddits = ''
-limit = 100
+parser = argparse.ArgumentParser() # add description
+parser.add_argument('--subreddits', '-s', type=str, required=True)
+parser.add_argument('--limit','-l', type=int,default=100)
+parser.add_argument('--chart', action='store_true')
+parser.add_argument('--verbose','-v',action='store_true')
+parser.add_argument('--chisquare',type=float, default=None, const=1, nargs='?')
+args = parser.parse_args()
 sql_dict = {'SQL': 0, 'Sequal': 0}
-create_barchart = False
-verbose = False
-chisquare = False
-chisquare_hypothesis = 1
 # if --help or -h appear in ANY of the command line args, print help and exit
 if '--help' in sys.argv or '-h' in sys.argv:
     print('command line arguments for sql_or_squal:')
@@ -20,56 +22,20 @@ if '--help' in sys.argv or '-h' in sys.argv:
     print('--chisquare: perform chisquare goodness of fit test, optional argument is ratio of sql to sequal.  Default arg is 1')
     sys.exit()
 
-# command line args are (-s,--subreddit), (-l,--limit), (--chart)
-for i,arg in enumerate(sys.argv): # go through all command line args
-    if i == 0:
-        continue
-    if arg == '--subreddit' or arg == '-s':
-        if i == len(sys.argv)-1:
-            print(f"mandatory argument to '{arg}' not provided\nplease provide a list of at least one subreddit seperated by '+'\nexample: 'subreddit1+subreddit2'",file=sys.stderr)
-            exit(1)
-        else:
-            subreddits = sys.argv[i+1]
-    if arg == '--limit' or arg == '-l':
-        if i == len(sys.argv)-1:
-            print(f"mandatory argument to '{arg}' not provided\nplease provide a positive integer (100 is default)",file=sys.stderr)
-            exit(1)
-        else:
-            limit = int(sys.argv[i+1])
-    if arg == '--chart':
-        create_barchart = True
-    if arg == '-v' or arg == '--verbose':
-        verbose = True
-    if arg == '--chisquare':
-        chisquare = True
-        if i == len(sys.argv)-1:
-            continue
-        elif not sys.argv[i+1].startswith('-'):
-            try:
-                chisquare_hypothesis = float(sys.argv[i+1])
-            except ValueError:
-                print('argument to --chisquare must be a floating point number', file=sys.stderr)
-                sys.exit(1)
-
-if not subreddits: # exit with error code if no subreddit specified
-    print('please provide at least one subreddit\nexample: "subreddit1+subreddit2"', file=sys.stderr)
-    exit(1)
-sql_dict = search_subreddits(subreddits = subreddits, limit = limit,verbose=verbose)
+sql_dict = search_subreddits(subreddits = args.subreddits, limit = args.limit,verbose=args.verbose)
 # print how often a sql or an sql was found
 print(f"pronounce as 'SQL': {sql_dict['SQL']}")
 print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 
-if create_barchart:
+if args.chart:
     ppl.create_sql_vs_sequal_chart(sql_dict)
 
-if chisquare:
+if args.chisquare is not None:
     o = [sql_dict['SQL'], sql_dict['Sequal']]
     total = sql_dict['SQL'] + sql_dict['Sequal']
-    e = [total/2, total/2]
-    if chisquare_hypothesis:
-        expected_sql = (chisquare_hypothesis / (chisquare_hypothesis + 1)) * total
-        expected_sequal = total - expected_sql
-        e = [expected_sql, expected_sequal]
+    expected_sql = (args.chisquare / (args.chisquare + 1)) * total
+    expected_sequal = total - expected_sql
+    e = [expected_sql, expected_sequal]
     res = stats.chisquare(o,e)
     print(f'chi-square GOF pvalue: {res.pvalue}') 
     print(f'chi-square GOF test statistic: {res.statistic}')
