@@ -22,9 +22,11 @@ sql_dict = search_subreddits(subreddits = args.subreddits, limit = args.limit,ve
 print(f"pronounce as 'SQL': {sql_dict['SQL']}")
 print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 
+# print barchart if --chart arg present
 if args.chart:
     ppl.create_sql_vs_sequal_chart(sql_dict)
 
+# print chisquare GOF test if --chisquare arg present
 if args.chisquare is not None:
     o = [sql_dict['SQL'], sql_dict['Sequal']]
     total = sql_dict['SQL'] + sql_dict['Sequal']
@@ -34,3 +36,4 @@ if args.chisquare is not None:
     res = stats.chisquare(o,e)
     print(f'chi-square GOF pvalue: {res.pvalue}') 
     print(f'chi-square GOF test statistic: {res.statistic}')
+
