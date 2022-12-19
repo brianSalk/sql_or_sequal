@@ -26,10 +26,9 @@ As of now there is a lot of stderr output.  To suppress the stderr output, prepe
 ```
 2> /dev/null python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart
 ```
-## Help
+## Help Wanted
 **Please help me:** \
 remove the error output at the beginning. \
-Do more meaningful analysis (Can we apply some hypothesis testing or basian statistics?) \
-make the code run faster. 
+
 
 
