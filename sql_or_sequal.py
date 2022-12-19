@@ -4,23 +4,13 @@ import sys
 import pyplot_lib as ppl
 from scipy import stats 
 parser = argparse.ArgumentParser() # add description
-parser.add_argument('--subreddits', '-s', type=str, required=True)
-parser.add_argument('--limit','-l', type=int,default=100)
-parser.add_argument('--chart', action='store_true')
-parser.add_argument('--verbose','-v',action='store_true')
-parser.add_argument('--chisquare',type=float, default=None, const=1, nargs='?')
+parser.add_argument('--subreddits', '-s', type=str, required=True, help='list of subreddit to search, seperate with + e.g mysql+sql+database', metavar='SUBREDDIT_LIST')
+parser.add_argument('--limit','-l', type=int,default=100,metavar='N', help='limit number of submissions to search in subreddit to N, default 100')
+parser.add_argument('--chart', action='store_true', help='create a barchar of the results')
+parser.add_argument('--verbose','-v',action='store_true', help='log username and subreddit of each match to stderr')
+parser.add_argument('--chisquare',type=float, default=None, const=1, nargs='?', help='perform chisquared goodness of fit test.  optional argument is ratio of SQL to Sequal, for example if you expect that the ratio of SQL to Sequal is 2:1, you would give --chisquare 2, if you expect 1 SQL for every 3 Sequals, --chisqare .3333333333')
 args = parser.parse_args()
 sql_dict = {'SQL': 0, 'Sequal': 0}
-# if --help or -h appear in ANY of the command line args, print help and exit
-if '--help' in sys.argv or '-h' in sys.argv:
-    print('command line arguments for sql_or_squal:')
-    print('-h or --help: display this message and exit successfully')
-    print('-s or --subreddit [subreddit_list]: indicate in which subreddit(s) to search')
-    print('-l or --limit: number of submissions to search per subreddit.  default is 100')
-    print('--chart: no arguments, create a visual bar char of results')
-    print('-v or --verbose: no arguments, log the name of the user and subreddit for each hit')
-    print('--chisquare: perform chisquare goodness of fit test, optional argument is ratio of sql to sequal.  Default arg is 1')
-    sys.exit()
 
 sql_dict = search_subreddits(subreddits = args.subreddits, limit = args.limit,verbose=args.verbose)
 # print how often a sql or an sql was found
