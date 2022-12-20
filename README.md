@@ -7,7 +7,11 @@ are saying 'a ESS-QUE-EL'.
 ## How to use this script
 **0)** make sure that you have praw 7.6.0 (or newer) installed 
 ```
-pip install praw` or `pii install --upgrade praw
+pip install praw
+```
+or 
+```
+pii install --upgrade praw
 ```
 **1)** clone this repo to your computer. 
 ```
