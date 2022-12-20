@@ -9,9 +9,9 @@ are saying 'a ESS-QUE-EL'.
 ```
 pip install praw
 ```
-or 
+or if you already istalled praw a while ago
 ```
-pii install --upgrade praw
+pip install --upgrade praw
 ```
 **1)** clone this repo to your computer. 
 ```
