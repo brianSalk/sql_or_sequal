@@ -5,15 +5,35 @@ If people are saying 'a SQL', we can assume they are pronouncing the word 'sequa
 are saying 'a ESS-QUE-EL'.
 
 ## How to use this script
-**0)** make sure that you have praw 7.6.0 (or newer) installed \
-**1)** clone this repo to your computer. \
-**2)** create a folder in the repo called *credentials.py* \
-**3)** create a reddit account (if you don't already have one) and log into your account \
-**4)** create a reddit script at <https://www.reddit.com/prefs/apps/> \
-**5)** once you have created your app, create the following variables in your *credentials.py* file: \
-	*client_id, client_secrete, user_agent, username, password* \
-and set each to its appropriate value 
-### Examples
+**0)** make sure that you have praw 7.6.0 (or newer) installed 
+```
+pip install praw
+```
+or if you already istalled praw a while ago
+```
+pip install --upgrade praw
+```
+**1)** clone this repo to your computer. 
+```
+git clone https://github.com/brianSalk/sql_or_sequal
+```
+**2)** create a reddit account if you do not already have one \
+**3)** [create a reddit app](https://www.reddit.com/prefs/apps/) make sure you check the option for script \
+**4)** in your cloned repository, create a new folder called `cridentials.py`.
+```
+touch credentials.py
+```
+**5)** Using the information from the reddit.com/prefs/apps, create the following 5 variables and store them in `credentials.py`
+```
+client_secret="asdfkajsldfkjasj83j823j" # located after word "secret"
+client_id="29829383983f9h2389fh2398fh2" # located right under app name
+usename="me123" # your reddit user name
+password="secret12" # your reddit password
+useragent="blahblah" # set equal to any string
+```
+[This picture](https://imgur.com/a/7PMAFCW) shows you where the client_id and client_secret are.
+
+## Usage
 #### view complete list of valid command line arguments along with breif summary of usage:
 ```
 python sql_or_sequal.py -h
@@ -28,7 +48,8 @@ As of now there is a lot of stderr output.  To suppress the stderr output, prepe
 ```
 ## Help Wanted
 **Please help me:** \
-remove the error output at the beginning. \
+remove the error output when script is ran. \
+do better statistical analysis.
 
 
 
