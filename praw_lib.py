@@ -71,6 +71,13 @@ def search_subreddit(each_sub, mp_list,limit,verbose=False):
     """
     search submissions and comments in subreddit
     """
+    reddit = praw.Reddit(
+            client_id = c.client_id,
+            client_secret = c.client_secret,
+            user_agent = c.user_agent,
+            username = c.username,
+            password = c.password
+            )
     sdict = defaultdict(int)
     for submission in reddit.subreddit(each_sub).new(limit=limit):
         #print(submission.title)
