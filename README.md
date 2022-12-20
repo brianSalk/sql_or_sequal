@@ -29,7 +29,7 @@ useragent="blahblah" # set equal to any string
 ```
 [This picture](https://imgur.com/a/7PMAFCW) shows you where the client_id and client_secret are.
 
-### Examples
+## Usage
 #### view complete list of valid command line arguments along with breif summary of usage:
 ```
 python sql_or_sequal.py -h
@@ -44,7 +44,8 @@ As of now there is a lot of stderr output.  To suppress the stderr output, prepe
 ```
 ## Help Wanted
 **Please help me:** \
-remove the error output at the beginning. 
+remove the error output when script is ran. \
+do better statistical analysis.
 
 
 
