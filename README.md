@@ -14,7 +14,7 @@ pip install praw` or `pii install --upgrade praw
 git clone https://github.com/brianSalk/sql_or_sequal
 ```
 **2)** create a reddit account if you do not already have one 
-**3)** [create a reddit app](https://www.reddit.com/prefs/apps/) make sure you check the option for script \ 
+**3)** [create a reddit app](https://www.reddit.com/prefs/apps/) make sure you check the option for script \
 **4)** in your cloned repository, create a new folder called `cridentials.py`.
 ```
 touch cridentials.py
