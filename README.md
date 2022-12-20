@@ -17,7 +17,7 @@ git clone https://github.com/brianSalk/sql_or_sequal
 **3)** [create a reddit app](https://www.reddit.com/prefs/apps/) make sure you check the option for script \
 **4)** in your cloned repository, create a new folder called `cridentials.py`.
 ```
-touch cridentials.py
+touch credentials.py
 ```
 **5)** Using the information from the reddit.com/prefs/apps, create the following 5 variables and store them in `credentials.py`
 ```
