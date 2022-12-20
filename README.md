@@ -5,15 +5,15 @@ If people are saying 'a SQL', we can assume they are pronouncing the word 'sequa
 are saying 'a ESS-QUE-EL'.
 
 ## How to use this script
-**0)** make sure that you have praw 7.6.0 (or newer) installed \ 
+**0)** make sure that you have praw 7.6.0 (or newer) installed 
 ```
 pip install praw` or `pii install --upgrade praw
 ```
-**1)** clone this repo to your computer. \  
+**1)** clone this repo to your computer. 
 ```
 git clone https://github.com/brianSalk/sql_or_sequal
 ```
-**2)** create a reddit account if you do not already have one \ 
+**2)** create a reddit account if you do not already have one 
 **3)** [create a reddit app](https://www.reddit.com/prefs/apps/) make sure you check the option for script \ 
 **4)** in your cloned repository, create a new folder called `cridentials.py`.
 ```
@@ -27,6 +27,7 @@ usename="me123" # your reddit user name
 password="secret12" # your reddit password
 useragent="blahblah" # set equal to any string
 ```
+[This picture](https://imgur.com/a/7PMAFCW) shows you where the client_id and client_secret are.
 
 ### Examples
 #### view complete list of valid command line arguments along with breif summary of usage:
