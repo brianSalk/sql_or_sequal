@@ -26,7 +26,7 @@ print(f"pronounce as 'Sequal': {sql_dict['Sequal']}")
 if args.chart:
     ppl.create_sql_vs_sequal_chart(sql_dict)
 
-# print chisquare GOF test if --chisquare arg present
+# print chisquare GOF test stats if --chisquare arg present
 if args.chisquare is not None:
     o = [sql_dict['SQL'], sql_dict['Sequal']]
     total = sql_dict['SQL'] + sql_dict['Sequal']
