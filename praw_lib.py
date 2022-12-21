@@ -5,8 +5,9 @@ import sys, logging
 import credentials as c
 import multiprocessing as mp
 from collections import defaultdict
+# set log level
 logging.basicConfig(format='%(levelname)s:%(message)s',level=logging.INFO)
-# authorize app
+# authorize app first time
 reddit = praw.Reddit(
         client_id = c.client_id,
         client_secret = c.client_secret,
@@ -22,7 +23,7 @@ def log_match(mtch, sub, user):
 
 def sql_regex(text, submission=None, comment = None, sql_dict=None, verbose=False):
     """
-    if regex match found, incrament dict at key
+    if regex match found, incrament dict at corresponding key 
     """
     user = ""
     sub = ""
@@ -71,6 +72,7 @@ def search_subreddit(each_sub, mp_list,limit,verbose=False):
     """
     search submissions and comments in subreddit
     """
+    # initialize Reddit object again to avoid SSL error
     reddit = praw.Reddit(
             client_id = c.client_id,
             client_secret = c.client_secret,
@@ -92,7 +94,8 @@ def search_subreddit(each_sub, mp_list,limit,verbose=False):
 
 def search_subreddits(subreddits,limit = 1000,verbose=False):
     """
-    loop over all subreddits
+    loop over all subreddits, start new process for each
+    subreddit
     """
     subreddits = subreddits.split('+')
     invalid = get_invalid_subreddits(subreddits)
@@ -101,6 +104,8 @@ def search_subreddits(subreddits,limit = 1000,verbose=False):
         print(invalid)
         sys.exit(1)
     with mp.Manager() as manager:
+        # mp_list is a list of dicts.  I needed to use manager.list()
+        # because I cannot safely append to a python dict asyncronously.
         mp_list = manager.list()
         processes = []
         for each_sub in subreddits:
@@ -110,6 +115,7 @@ def search_subreddits(subreddits,limit = 1000,verbose=False):
             processes.append(p)
         for proc in processes:
             proc.join()
+        # create ans, the dict containing the final SQL and Sequal counts.
         ans = defaultdict(int)
         for each in mp_list:
             for key,val in each.items():
