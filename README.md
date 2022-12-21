@@ -42,10 +42,7 @@ python sql_or_sequal.py -h
 ```
 python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart
 ```
-As of now there is a lot of stderr output.  To suppress the stderr output, prepend `2> /dev/null ` to the above command: 
-```
-2> /dev/null python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart
-```
+
 ## Help Wanted
 **Please help me:** \
 remove the error output when script is ran. \
