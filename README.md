@@ -43,10 +43,7 @@ python sql_or_sequal.py -h
 python sql_or_sequal.py -s 'sql+programminghumor' -l 300 --chart
 ```
 
-## Help Wanted
-**Please help me:** \
-remove the error output when script is ran. \
-do better statistical analysis.
+
 
 
 
