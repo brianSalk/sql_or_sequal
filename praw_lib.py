@@ -82,7 +82,6 @@ def search_subreddit(each_sub, mp_list,limit,verbose=False):
             )
     sdict = defaultdict(int)
     for submission in reddit.subreddit(each_sub).new(limit=limit):
-        #print(submission.title)
         comment_forest = submission.comments.replace_more(limit=100)
         sql_regex(submission.title, submission=submission, sql_dict=sdict,verbose=verbose)
         sql_regex(submission.selftext, submission, sql_dict=sdict, verbose=verbose)
