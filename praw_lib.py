@@ -1,6 +1,5 @@
 import praw
 import re
-import pickle
 import sys, logging
 import credentials as c
 import multiprocessing as mp
