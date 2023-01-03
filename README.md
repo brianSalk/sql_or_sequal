@@ -1,6 +1,6 @@
 # sql_or_sequal
 ### a simple web scraping script to investigate how redditors pronounce SQL.
-This script uses the praw module to create a reddit scrapper that searches submissions and comments for the word SQL proceeded by either 'a' or 'an'.
+This script uses the praw module to create a reddit scraper that searches submissions and comments for the word SQL proceeded by either 'a' or 'an'.
 If people are saying 'a SQL', we can assume they are pronouncing the word 'sequal'.  If on the other hand, they are typing 'an SQL', we assume they 
 are saying 'a ESS-QUE-EL'.
 
