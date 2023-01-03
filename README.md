@@ -5,13 +5,9 @@ If people are saying 'a SQL', we can assume they are pronouncing the word 'sequa
 are saying 'a ESS-QUE-EL'.
 
 ## How to use this script
-**0)** make sure that you have praw 7.6.0 (or newer) installed 
+**0)** make sure that you have praw, scipy and matplotlib installed (unless you are using docker)
 ```
-pip install praw
-```
-or if you already istalled praw a while ago
-```
-pip install --upgrade praw
+pip install praw scipy matplotlib
 ```
 **1)** clone this repo to your computer. 
 ```
