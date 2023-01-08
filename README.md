@@ -5,7 +5,7 @@ If people are saying 'a SQL', we can assume they are pronouncing the word 'sequa
 are saying 'a ESS-QUE-EL'.
 
 ## How to use this script
-**0)** make sure that you have praw, scipy and matplotlib installed (unless you are using docker)
+**0)** make sure that you have praw, scipy and matplotlib installed (unless you are installing via docker)
 ```
 pip install praw scipy matplotlib
 ```
